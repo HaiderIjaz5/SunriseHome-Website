@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Property</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<?php include 'include/header.php'; ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+require 'config.php';
+?>
+
+<main class="submit-property-page">
+    <section class="submit-property-container">
+        <h1>Submit a Property</h1>
+        <form action="submit_property_handler.php" method="POST" enctype="multipart/form-data" class="submit-property-form">
+            <div class="form-group">
+                <label for="property_title">Property Title</label>
+                <input type="text" id="property_title" name="property_title" placeholder="Enter property title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Enter property description" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price ($)</label>
+                <input type="number" id="price" name="price" placeholder="Enter price" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter location" required>
+            </div>
+            <div class="form-group">
+                <label for="property_image">Property Image</label>
+                <input type="file" id="property_image" name="property_image" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-button">Submit Property</button>
+        </form>
+    </section>
+</main>
+
+<?php include 'include/footer.php'; ?>
+</body>
+</html>
